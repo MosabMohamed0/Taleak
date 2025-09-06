@@ -69,26 +69,25 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el);
   });
 });
+// رابط Google Apps Script Web App
+const scriptURL =
+  "https://script.google.com/macros/s/AKfycbw2Fs0X9UBL41Ej6ryoJAMsklbMd411rpVcpm6mOJJwdCYbmjcVNyF6LMlchh_qA7Qdqw/exec"; // حط الرابط اللي طلعلك من نشر الويب
 
-// Form handling and Excel export functionality
 const registrationForm = document.getElementById("registrationForm");
 const successModal = document.getElementById("successModal");
 const closeModalBtns = document.querySelectorAll(".close, .close-modal");
 
-// Excel data storage (في الواقع، ستحتاج إلى خدمة backend لحفظ البيانات)
-let registrationData = [];
-
 registrationForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  // تحقق من صحة الفورم
+  if (!validateForm()) return;
 
   // Show loading state
   const submitBtn = e.target.querySelector('button[type="submit"]');
   const originalText = submitBtn.innerHTML;
   submitBtn.innerHTML = '<span class="loading"></span> جاري الإرسال...';
   submitBtn.disabled = true;
-
-  // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   // Collect form data
   const formData = new FormData(registrationForm);
@@ -103,98 +102,39 @@ registrationForm.addEventListener("submit", async (e) => {
 
   // Handle checkboxes for courses
   const selectedCourses = [];
-  const courseCheckboxes = document.querySelectorAll(
-    'input[name="courses"]:checked'
-  );
-  courseCheckboxes.forEach((checkbox) => {
-    selectedCourses.push(checkbox.value);
+  document.querySelectorAll('input[name="courses"]:checked').forEach((cb) => {
+    selectedCourses.push(cb.value);
   });
   data.courses = selectedCourses;
 
   // Add timestamp
   data.registrationDate = new Date().toLocaleString("ar-EG");
 
-  // Store data (in a real app, send to server)
-  registrationData.push(data);
+  try {
+    // إرسال البيانات إلى Google Sheets
+    const response = await fetch(scriptURL, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
 
-  // Save to localStorage for demonstration (in real app, use backend)
-  localStorage.setItem(
-    "academyRegistrations",
-    JSON.stringify(registrationData)
-  );
+    const result = await response.json();
 
-  // Reset form
-  registrationForm.reset();
+    if (result.status === "success") {
+      registrationForm.reset();
+      successModal.style.display = "block";
+    } else {
+      alert("❌ حصل خطأ: " + (result.message || "تعذر الإرسال"));
+    }
+  } catch (err) {
+    alert("⚠️ خطأ في الاتصال: " + err.message);
+  }
 
   // Reset button
   submitBtn.innerHTML = originalText;
   submitBtn.disabled = false;
-
-  // Show success modal
-  successModal.style.display = "block";
-
-  // Export to Excel (demonstration - in real app, handle server-side)
-  exportToExcel(data);
 });
-
-// Export to Excel function
-function exportToExcel(newData) {
-  // This is a simplified version. In a real application, you would:
-  // 1. Send data to your backend
-  // 2. Backend saves to Excel file or database
-  // 3. Optionally provide download link
-
-  console.log("New registration data:", newData);
-  console.log("All registrations:", registrationData);
-
-  // For demonstration purposes, we'll create a CSV-like structure
-  const csvData = convertToCSV(registrationData);
-  console.log("CSV format:", csvData);
-}
-
-// Convert data to CSV format
-function convertToCSV(data) {
-  if (data.length === 0) return "";
-
-  const headers = [
-    "اسم الطالب",
-    "العمر",
-    "الجنس",
-    "اسم ولي الأمر",
-    "رقم الهاتف",
-    "البريد الإلكتروني",
-    "الكورسات المختارة",
-    "الوقت المفضل",
-    "ملاحظات",
-    "تاريخ التسجيل",
-  ];
-
-  const rows = data.map((row) => [
-    row.studentName || "",
-    row.age || "",
-    row.gender === "male" ? "ذكر" : "أنثى",
-    row.parentName || "",
-    row.phone || "",
-    row.email || "",
-    Array.isArray(row.courses) ? row.courses.join(", ") : "",
-    getTimeLabel(row.preferredTime) || "",
-    row.message || "",
-    row.registrationDate || "",
-  ]);
-
-  return [headers, ...rows].map((row) => row.join(",")).join("\n");
-}
-
-// Helper function to get time labels in Arabic
-function getTimeLabel(timeValue) {
-  const timeLabels = {
-    morning: "صباحاً (9 ص - 12 ظ)",
-    afternoon: "بعد الظهر (1 ظ - 4 ع)",
-    evening: "مساءً (5 م - 8 م)",
-    flexible: "مرن",
-  };
-  return timeLabels[timeValue] || timeValue;
-}
 
 // Modal functionality
 closeModalBtns.forEach((btn) => {
@@ -210,7 +150,7 @@ window.addEventListener("click", (e) => {
   }
 });
 
-// Form validation enhancements
+// ✅ Form validation enhancements
 function validateForm() {
   const requiredFields = registrationForm.querySelectorAll("[required]");
   let isValid = true;
@@ -257,7 +197,7 @@ function validateForm() {
   return isValid;
 }
 
-// Add real-time validation
+// ✅ Real-time validation
 document.addEventListener("DOMContentLoaded", () => {
   const inputs = registrationForm.querySelectorAll("input, select, textarea");
 
