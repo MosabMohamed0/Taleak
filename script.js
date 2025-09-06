@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // رابط Google Apps Script Web App
 const scriptURL =
-  "https://script.google.com/macros/s/AKfycbwsXbfcLllF2yUDHjyjXSmmOa2kaIdJ9N-1pZLC1uqGItR_uQtqkc_DHJAYh5axI8uLsw/exec";
+  "https://script.google.com/macros/s/AKfycbxk1xLU2FCzQ6IhzuHMht4wQ7fFhd2QSZBwe9febYmRRf2HB2SfOhIeepgli8OVFo0EnQ/exec";
 
 const registrationForm = document.getElementById("registrationForm");
 const successModal = document.getElementById("successModal");
