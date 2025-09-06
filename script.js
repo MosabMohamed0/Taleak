@@ -56,7 +56,6 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-// Add animation classes to elements
 document.addEventListener("DOMContentLoaded", () => {
   const animatedElements = document.querySelectorAll(
     ".about-card, .course-card, .feature-card, .contact-card"
@@ -70,162 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// --- Google Sheets & Form Submission Logic ---
-
-// رابط Google Apps Script Web App
-const scriptURL =
-  "https://script.google.com/macros/s/AKfycbz7P6KcDUGX5iBWq2NbGWymFCEVDtgDcDL512pjPnb2ykRMRpHPZ6R-ITrd_1ADv_IM7g/exec";
-
-const registrationForm = document.getElementById("registrationForm");
-const successModal = document.getElementById("successModal");
-const closeModalBtns = document.querySelectorAll(".close, .close-modal");
-
-// The single, corrected form submission handler
-registrationForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  // Step 1: Validate form first
-  if (!validateForm()) {
-    return; // Stop if form is not valid
-  }
-
-  // Step 2: Show loading state
-  const submitBtn = e.target.querySelector('button[type="submit"]');
-  const originalText = submitBtn.innerHTML;
-  submitBtn.innerHTML = '<span class="loading"></span> جاري الإرسال...';
-  submitBtn.disabled = true;
-
-  try {
-    // Step 3: Collect form data
-    const formData = new FormData(registrationForm);
-    const data = {};
-
-    // Handle regular form fields
-    for (let [key, value] of formData.entries()) {
-      if (key !== "courses") {
-        data[key] = value;
-      }
-    }
-
-    // Handle checkboxes for courses
-    const selectedCourses = [];
-    document.querySelectorAll('input[name="courses"]:checked').forEach((cb) => {
-      selectedCourses.push(cb.value);
-    });
-    data.courses = selectedCourses.join(", "); // Join into a single string
-
-    // Add timestamp
-    data.registrationDate = new Date().toLocaleString("ar-EG");
-
-    // Step 4: Send data to Google Sheets
-    const response = await fetch(scriptURL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const result = await response.json();
-
-    if (result.status === "success") {
-      registrationForm.reset();
-      successModal.style.display = "block";
-    } else {
-      alert("❌ حصل خطأ: " + (result.message || "تعذر الإرسال"));
-    }
-  } catch (err) {
-    alert("⚠️ خطأ في الاتصال: " + err.message);
-  } finally {
-    // Step 5: Reset button
-    submitBtn.innerHTML = originalText;
-    submitBtn.disabled = false;
-  }
-});
-
-// Modal functionality
-closeModalBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    successModal.style.display = "none";
-  });
-});
-
-// Close modal when clicking outside
-window.addEventListener("click", (e) => {
-  if (e.target === successModal) {
-    successModal.style.display = "none";
-  }
-});
-
-// --- Form Validation ---
-
-function validateForm() {
-  const requiredFields = registrationForm.querySelectorAll("[required]");
-  let isValid = true;
-
-  requiredFields.forEach((field) => {
-    if (!field.value.trim()) {
-      field.style.borderColor = "#ef4444";
-      isValid = false;
-    } else {
-      field.style.borderColor = "#e5e7eb";
-    }
-  });
-
-  // Validate at least one course is selected
-  const courseCheckboxes = document.querySelectorAll(
-    'input[name="courses"]:checked'
-  );
-  if (courseCheckboxes.length === 0) {
-    alert("يرجى اختيار كورس واحد على الأقل");
-    isValid = false;
-  }
-
-  // Validate email format
-  const emailField = document.getElementById("email");
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (emailField.value && !emailPattern.test(emailField.value)) {
-    emailField.style.borderColor = "#ef4444";
-    alert("يرجى إدخال بريد إلكتروني صحيح");
-    isValid = false;
-  }
-
-  // Validate phone number (Egyptian format)
-  const phoneField = document.getElementById("phone");
-  const phonePattern = /^(\+20|0)?1[0-2,5]\d{8}$/;
-  if (
-    phoneField.value &&
-    !phonePattern.test(phoneField.value.replace(/\s/g, ""))
-  ) {
-    phoneField.style.borderColor = "#ef4444";
-    alert("يرجى إدخال رقم هاتف صحيح");
-    isValid = false;
-  }
-
-  return isValid;
-}
-
-// Real-time validation feedback
-document.addEventListener("DOMContentLoaded", () => {
-  const inputs = registrationForm.querySelectorAll("input, select, textarea");
-
-  inputs.forEach((input) => {
-    input.addEventListener("blur", () => {
-      if (input.hasAttribute("required") && !input.value.trim()) {
-        input.style.borderColor = "#ef4444";
-      } else {
-        input.style.borderColor = "#e5e7eb";
-      }
-    });
-
-    input.addEventListener("input", () => {
-      if (input.style.borderColor === "rgb(239, 68, 68)") {
-        input.style.borderColor = "#e5e7eb";
-      }
-    });
-  });
-});
-
 // --- Additional UI Enhancements & Animations ---
 
 // Statistics counter animation
@@ -235,7 +78,7 @@ function animateNumbers() {
   stats.forEach((stat) => {
     const target = parseInt(stat.textContent);
     let current = 0;
-    const increment = target / 50; // Adjust speed here
+    const increment = target / 50;
     const timer = setInterval(() => {
       current += increment;
       if (current >= target) {
@@ -244,7 +87,7 @@ function animateNumbers() {
       }
       stat.textContent =
         Math.floor(current) + (stat.textContent.includes("+") ? "+" : "");
-    }, 40); // Adjust interval here
+    }, 40);
   });
 }
 
@@ -336,11 +179,11 @@ function addRevealAnimations() {
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
-// Floating action button for quick registration
+// Floating action button
 function createFloatingActionButton() {
-  const fab = document.createElement("a"); // Use an anchor tag for semantics
-  fab.href = "#register";
-  fab.innerHTML = '<i class="fas fa-plus"></i>'; // Ensure you have FontAwesome linked
+  const fab = document.createElement("a");
+  fab.href = "#top";
+  fab.innerHTML = '<i class="fas fa-arrow-up"></i>';
   fab.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -391,7 +234,7 @@ function createFloatingActionButton() {
   });
 }
 
-// Typing animation for hero title
+// Typing animation
 function typeWriter(element, text, speed = 100) {
   let i = 0;
   element.innerHTML = "";
@@ -405,48 +248,22 @@ function typeWriter(element, text, speed = 100) {
   type();
 }
 
-// --- Initialize everything on DOMContentLoaded ---
-
+// --- Initialize everything ---
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize UI features
   createScrollProgress();
   createFloatingActionButton();
   addCourseCardEffects();
   lazyLoadImages();
   addRevealAnimations();
 
-  // Observe hero section for number animation
   const heroSection = document.querySelector(".hero");
   if (heroSection) {
     heroObserver.observe(heroSection);
   }
 
-  // Initialize typing animation
   const heroTitle = document.querySelector(".hero-title");
   if (heroTitle) {
     const originalText = heroTitle.textContent;
     typeWriter(heroTitle, originalText, 80);
   }
-
-  // Console message for developers
-  console.log(`
-  🎓 أكاديميتنا - موقع الأكاديمية
-  ════════════════════════════════
-
-  📊 إحصائيات الموقع:
-  • تم تحميل جميع الملفات بنجاح
-  • النموذج متصل بـ Google Sheets
-  • جميع الرسوم المتحركة مفعلة
-
-  📋 Google Sheets Integration:
-  • URL: ${scriptURL}
-  • البيانات ترسل تلقائياً لـ Google Sheets
-
-  💡 للمطورين:
-  • الكود منظم وجاهز للتطوير.
-  
-  🔗 التواصل:
-  info@academy.com
-  ════════════════════════════════
-  `);
 });
