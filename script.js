@@ -465,7 +465,7 @@ console.log(`
 • جميع الرسوم المتحركة مفعلة
 
 📋 Google Sheets Integration:
-• URL: ${GOOGLE_SHEETS_URL}
+• URL: ${scriptURL}
 • البيانات ترسل تلقائياً لـ Google Sheets
 • نسخة احتياطية في localStorage
 
