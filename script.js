@@ -71,7 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 // رابط Google Apps Script Web App
 const scriptURL =
-  "https://script.google.com/macros/s/AKfycbw2Fs0X9UBL41Ej6ryoJAMsklbMd411rpVcpm6mOJJwdCYbmjcVNyF6LMlchh_qA7Qdqw/exec"; // حط الرابط اللي طلعلك من نشر الويب
+  "https://script.google.com/macros/s/AKfycbwsXbfcLllF2yUDHjyjXSmmOa2kaIdJ9N-1pZLC1uqGItR_uQtqkc_DHJAYh5axI8uLsw/exec";
+// حط الرابط اللي طلعلك من نشر الويب
 
 const registrationForm = document.getElementById("registrationForm");
 const successModal = document.getElementById("successModal");
