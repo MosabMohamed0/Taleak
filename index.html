@@ -1,181 +1,616 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quranic Mind Academy</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>طليق - تعليم متميز بالقيم الإسلامية</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
-    <!-- Navbar -->
-    <header class="navbar">
-      <div class="container">
-        <div class="logo">QuranicMind</div>
-        <nav>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#courses">Courses</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#students">Students</a></li>
-            <li><a href="#form">Contact</a></li>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="logo">
+            <img
+              src="images/Taleek.png"
+              alt="شعار الأكاديمية"
+              class="logo-img"
+            />
+            <span class="logo-text">طليق</span>
+          </div>
+          <ul class="nav-menu">
+            <li><a href="#home" class="nav-link">الرئيسية</a></li>
+            <li><a href="#about" class="nav-link">من نحن</a></li>
+            <li><a href="#courses" class="nav-link">الكورسات</a></li>
+            <li><a href="#features" class="nav-link">المميزات</a></li>
+            <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
+            <li>
+              <a href="#register" class="nav-link register-btn">سجل الآن</a>
+            </li>
           </ul>
-        </nav>
-      </div>
+          <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-      <div class="container hero-content">
-        <div class="text">
-          <h1>Online Quran & Arabic Classes</h1>
-          <p>
-            Learn Quran and Arabic with expert Al-Azhar certified tutors.
-            Flexible timings and personalized lessons from the comfort of your
-            home.
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">مرحباً بك في اكادمية طليق</h1>
+          <p class="hero-subtitle">
+            تعليم متميز يجمع بين العلم والقيم الإسلامية
           </p>
-          <a href="#form" class="btn">Book Free Trial</a>
+          <p class="hero-description">
+            نقدم برامج تعليمية شاملة تهدف إلى بناء شخصية الطالب علمياً
+            وأخلاقياً، مع مناهج حديثة وطرق تدريس مبتكرة تناسب جميع الأعمار
+          </p>
+          <div class="hero-buttons">
+            <a href="#register" class="btn btn-primary">ابدأ رحلتك التعليمية</a>
+            <a href="#about" class="btn btn-secondary">تعرف على المزيد</a>
+          </div>
         </div>
-        <div class="image">
-          <img
-            src="https://www.pexels.com/photo/a-beach-with-palm-trees-13397143/"
-            alt="Course"
-          />
+        <div class="hero-image">
+          <img src="images/Taleek.png" alt="صورة الأكاديمية" />
         </div>
+        <div class="floating-stats">
+          <div class="stat">
+            <span class="stat-number">300+</span>
+            <span class="stat-label">طالب</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">مدرس</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">كورس</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <i class="fas fa-chevron-down"></i>
       </div>
     </section>
 
-    <!-- About -->
+    <!-- About Section -->
     <section id="about" class="about">
       <div class="container">
-        <h2>Welcome to Quranic Mind Academy</h2>
-        <p>
-          Join our online Quran and Arabic classes with native tutors. We help
-          students of all ages perfect Quran recitation, Tajweed, memorization,
-          and Arabic.
-        </p>
+        <div class="section-header">
+          <h2>من نحن</h2>
+          <p>
+            نحن أكاديمية تعليمية رائدة تهدف إلى تقديم تعليم متميز يجمع بين العلم
+            الحديث والقيم الإسلامية الأصيلة
+          </p>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <div class="about-card">
+              <div class="icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h3>رؤيتنا</h3>
+              <p>
+                أن نكون الخيار الأول للأسر المسلمة الباحثة عن تعليم متميز يربط
+                بين العلم والإيمان
+              </p>
+            </div>
+            <div class="about-card">
+              <div class="icon">
+                <i class="fas fa-target"></i>
+              </div>
+              <h3>رسالتنا</h3>
+              <p>
+                تقديم برامج تعليمية شاملة تنمي الشخصية الإسلامية المتوازنة
+                والمتميزة علمياً وأخلاقياً
+              </p>
+            </div>
+            <div class="about-card">
+              <div class="icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <h3>قيمنا</h3>
+              <p>
+                الجودة في التعليم، الأمانة في التعامل، والإخلاص في العمل من أجل
+                مستقبل أفضل لأطفالنا
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Courses -->
+    <!-- Courses Section -->
     <section id="courses" class="courses">
       <div class="container">
-        <h2>Our Courses</h2>
-        <div class="grid">
-          <div class="card">
-            <img
-              src="https://images.unsplash.com/photo-1588075592446-2467c4927b8e?w=800&q=80"
-              alt="Online Class"
-            />
-
-            <h3>Quran Reading & Tajweed</h3>
-            <p>Improve your recitation with expert guidance and fluency.</p>
+        <div class="section-header">
+          <h2>الكورسات المتاحة</h2>
+          <p>
+            اختر من بين مجموعة متنوعة من الكورسات التعليمية المصممة خصيصاً
+            لتناسب جميع الأعمار والمستويات
+          </p>
+        </div>
+        <div class="courses-grid">
+          <div class="course-card">
+            <div class="course-image">
+              <img src="images/Taleek.png" alt="تحفيظ القرآن" />
+              <div class="course-overlay">
+                <span class="course-level">جميع المستويات</span>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>تحفيظ القرآن الكريم</h3>
+              <p>
+                برنامج شامل لتحفيظ القرآن الكريم مع تعلم أحكام التجويد والتلاوة
+                الصحيحة
+              </p>
+              <div class="course-features">
+                <span><i class="fas fa-clock"></i> 3 ساعات أسبوعياً</span>
+                <span><i class="fas fa-users"></i> مجموعات صغيرة</span>
+              </div>
+              <div class="course-price">
+                <span class="price">200 جنيه/شهر</span>
+              </div>
+            </div>
           </div>
-          <div class="card">
-            <img
-              src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&q=80"
-              alt="Quran Reading"
-            />
 
-            <h3>Quran Memorization (Hifz)</h3>
-            <p>Memorize with structured plans and guided revision.</p>
+          <div class="course-card">
+            <div class="course-image">
+              <img src="images/Taleek.png" alt="اللغة العربية" />
+              <div class="course-overlay">
+                <span class="course-level">مبتدئ - متقدم</span>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>اللغة العربية</h3>
+              <p>
+                تعلم قواعد اللغة العربية والإعراب والأدب مع التركيز على النصوص
+                القرآنية والأدبية
+              </p>
+              <div class="course-features">
+                <span><i class="fas fa-clock"></i> 4 ساعات أسبوعياً</span>
+                <span><i class="fas fa-book"></i> منهج شامل</span>
+              </div>
+              <div class="course-price">
+                <span class="price">250 جنيه/شهر</span>
+              </div>
+            </div>
           </div>
-          <div class="card">
-            <img
-              src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&q=80"
-              alt="Quran Reading"
-            />
 
-            <h3>Arabic Language</h3>
-            <p>Learn Modern Standard & Classical Arabic confidently.</p>
+          <div class="course-card">
+            <div class="course-image">
+              <img src="images/Taleek.png" alt="الدراسات الإسلامية" />
+              <div class="course-overlay">
+                <span class="course-level">جميع الأعمار</span>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>الدراسات الإسلامية</h3>
+              <p>
+                دراسة العقيدة والفقه والسيرة النبوية والأخلاق الإسلامية بطريقة
+                معاصرة
+              </p>
+              <div class="course-features">
+                <span><i class="fas fa-clock"></i> 2 ساعة أسبوعياً</span>
+                <span><i class="fas fa-heart"></i> تطبيق عملي</span>
+              </div>
+              <div class="course-price">
+                <span class="price">180 جنيه/شهر</span>
+              </div>
+            </div>
           </div>
-          <div class="card">
-            <img
-              src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&q=80"
-              alt="Quran Reading"
-            />
 
-            <h3>Islamic Studies</h3>
-            <p>Study Aqeedah, Fiqh, Seerah, and more.</p>
+          <div class="course-card">
+            <div class="course-image">
+              <img src="images/Taleek.png" alt="الرياضيات" />
+              <div class="course-overlay">
+                <span class="course-level">ابتدائي - ثانوي</span>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>الرياضيات</h3>
+              <p>
+                تعلم الرياضيات بطرق مبتكرة وممتعة مع ربطها بالحياة العملية
+                والتطبيقات الإسلامية
+              </p>
+              <div class="course-features">
+                <span><i class="fas fa-clock"></i> 3 ساعات أسبوعياً</span>
+                <span><i class="fas fa-calculator"></i> تطبيق عملي</span>
+              </div>
+              <div class="course-price">
+                <span class="price">300 جنيه/شهر</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="course-image">
+              <img src="images/Taleek.png" alt="العلوم" />
+              <div class="course-overlay">
+                <span class="course-level">ابتدائي - إعدادي</span>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>العلوم الطبيعية</h3>
+              <p>
+                استكشاف عجائب الكون من خلال العلوم مع ربطها بآيات القرآن الكريم
+                والإعجاز العلمي
+              </p>
+              <div class="course-features">
+                <span><i class="fas fa-clock"></i> 3 ساعات أسبوعياً</span>
+                <span><i class="fas fa-microscope"></i> تجارب عملية</span>
+              </div>
+              <div class="course-price">
+                <span class="price">280 جنيه/شهر</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="course-image">
+              <img src="images/Taleek.png" alt="اللغة الإنجليزية" />
+              <div class="course-overlay">
+                <span class="course-level">مبتدئ - متقدم</span>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>اللغة الإنجليزية</h3>
+              <p>
+                تعلم اللغة الإنجليزية بطرق حديثة وممتعة مع التركيز على المحادثة
+                والكتابة
+              </p>
+              <div class="course-features">
+                <span><i class="fas fa-clock"></i> 4 ساعات أسبوعياً</span>
+                <span><i class="fas fa-comments"></i> محادثة تفاعلية</span>
+              </div>
+              <div class="course-price">
+                <span class="price">320 جنيه/شهر</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section id="why" class="why">
+    <!-- Features Section -->
+    <section id="features" class="features">
       <div class="container">
-        <h2>Why Choose Us</h2>
-        <ul>
-          <li>✔ Native Egyptian Tutors</li>
-          <li>✔ Flexible Schedules</li>
-          <li>✔ Affordable Pricing</li>
-          <li>✔ 24/7 Support</li>
-          <li>✔ Certificates upon Completion</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Pricing -->
-    <section id="pricing" class="pricing">
-      <div class="container">
-        <h2>Pricing Plans</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>2 Sessions / Week</h3>
-            <p>30 min per session</p>
-            <h4>£24 / Month</h4>
-            <a href="#form" class="btn">Book Free Trial</a>
+        <div class="section-header">
+          <h2>لماذا تختار أكاديميتنا؟</h2>
+          <p>
+            نتميز بمجموعة من الخصائص التي تجعلنا الخيار الأمثل لتعليم أطفالكم
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h3>مدرسون مؤهلون</h3>
+            <p>
+              فريق من المدرسين المتخصصين والمؤهلين أكاديمياً مع خبرة واسعة في
+              التدريس
+            </p>
           </div>
-          <div class="card">
-            <h3>3 Sessions / Week</h3>
-            <p>30 min per session</p>
-            <h4>£36 / Month</h4>
-            <a href="#form" class="btn">Book Free Trial</a>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-laptop"></i>
+            </div>
+            <h3>تعلم مرن</h3>
+            <p>
+              إمكانية التعلم أونلاين أو حضورياً مع جداول زمنية مرنة تناسب ظروف
+              الأسرة
+            </p>
           </div>
-          <div class="card">
-            <h3>5 Sessions / Week</h3>
-            <p>30 min per session</p>
-            <h4>£55 / Month</h4>
-            <a href="#form" class="btn">Book Free Trial</a>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <h3>شهادات معتمدة</h3>
+            <p>
+              شهادات إتمام معتمدة لجميع الكورسات مع تقييم مستمر لمستوى الطالب
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>مجموعات صغيرة</h3>
+            <p>التدريس في مجموعات صغيرة لضمان الاهتمام الشخصي بكل طالب</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>متابعة دورية</h3>
+            <p>تقارير دورية للأهل عن مستوى الطالب وتطوره الأكاديمي والسلوكي</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h3>بيئة إسلامية</h3>
+            <p>
+              بيئة تعليمية إسلامية تركز على بناء الشخصية الإيمانية والأخلاقية
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Form -->
-    <section id="form" class="form-section">
+    <!-- Registration Section -->
+    <section id="register" class="registration">
       <div class="container">
-        <h2>Book Your Free Trial</h2>
-        <form name="submit-to-google-sheet">
-          <input
-            type="text"
-            name="FirstName"
-            placeholder="First Name"
-            required
-          />
-          <input type="text" name="LastName" placeholder="Last Name" required />
-          <input
-            type="text"
-            name="Phone"
-            placeholder="Phone / WhatsApp"
-            required
-          />
-          <input type="email" name="Email" placeholder="Email" required />
-          <input type="text" name="Country" placeholder="Country" required />
-          <textarea name="Comment" placeholder="Comment"></textarea>
-          <button type="submit" class="btn">Send</button>
-        </form>
-        <p id="msg"></p>
+        <div class="registration-content">
+          <div class="registration-info">
+            <h2>انضم إلى أكاديميتنا اليوم</h2>
+            <p>
+              ابدأ رحلة تعليمية متميزة لك أو لأطفالك. املأ النموذج وسنتواصل معك
+              قريباً
+            </p>
+            <div class="benefits-list">
+              <div class="benefit">
+                <i class="fas fa-check-circle"></i>
+                <span>استشارة مجانية لتحديد المستوى</span>
+              </div>
+              <div class="benefit">
+                <i class="fas fa-check-circle"></i>
+                <span>حصة تجريبية مجانية</span>
+              </div>
+              <div class="benefit">
+                <i class="fas fa-check-circle"></i>
+                <span>خطة دراسية شخصية</span>
+              </div>
+            </div>
+          </div>
+          <div class="registration-form">
+            <form id="registrationForm" class="form">
+              <div class="form-group">
+                <label for="studentName">اسم الطالب</label>
+                <input
+                  type="text"
+                  id="studentName"
+                  name="studentName"
+                  required
+                />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="age">العمر</label>
+                  <input
+                    type="number"
+                    id="age"
+                    name="age"
+                    min="5"
+                    max="25"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="gender">الجنس</label>
+                  <select id="gender" name="gender" required>
+                    <option value="">اختر</option>
+                    <option value="male">ذكر</option>
+                    <option value="female">أنثى</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="parentName">اسم ولي الأمر</label>
+                <input type="text" id="parentName" name="parentName" required />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">رقم الهاتف</label>
+                  <input type="tel" id="phone" name="phone" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">البريد الإلكتروني</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="courses">الكورسات المهتم بها</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="courses" value="quran" />
+                    <span>تحفيظ القرآن الكريم</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="courses" value="arabic" />
+                    <span>اللغة العربية</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="courses" value="islamic" />
+                    <span>الدراسات الإسلامية</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="courses" value="math" />
+                    <span>الرياضيات</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="courses" value="science" />
+                    <span>العلوم الطبيعية</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="courses" value="english" />
+                    <span>اللغة الإنجليزية</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="preferredTime">الوقت المفضل للدروس</label>
+                <select id="preferredTime" name="preferredTime" required>
+                  <option value="">اختر الوقت</option>
+                  <option value="morning">صباحاً (9 ص - 12 ظ)</option>
+                  <option value="afternoon">بعد الظهر (1 ظ - 4 ع)</option>
+                  <option value="evening">مساءً (5 م - 8 م)</option>
+                  <option value="flexible">مرن</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">ملاحظات إضافية</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="أي معلومات إضافية تود إضافتها..."
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full">
+                <i class="fas fa-paper-plane"></i>
+                إرسال طلب التسجيل
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2>تواصل معنا</h2>
+          <p>
+            نحن هنا للإجابة على استفساراتك ومساعدتك في اختيار البرنامج التعليمي
+            المناسب
+          </p>
+        </div>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h3>موقعنا</h3>
+              <p>شارع التحرير، وسط البلد<br />القاهرة، مصر</p>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h3>اتصل بنا</h3>
+              <p>+20 123 456 7890<br />+20 987 654 3210</p>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h3>راسلنا</h3>
+              <p>info@academy.com<br />support@academy.com</p>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h3>أوقات العمل</h3>
+              <p>السبت - الخميس: 9 ص - 6 م<br />الجمعة: مغلق</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
-        <p>© 2025 Quranic Mind Academy - All Rights Reserved</p>
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-logo">
+              <img src="images/Taleek.png" alt="شعار الأكاديمية" />
+              <span>أكاديميتنا</span>
+            </div>
+            <p>
+              نحن نؤمن بأن التعليم الجيد يبني مستقبل أفضل. انضم إلينا في رحلة
+              التعلم والنمو.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h3>روابط سريعة</h3>
+            <ul>
+              <li><a href="#home">الرئيسية</a></li>
+              <li><a href="#about">من نحن</a></li>
+              <li><a href="#courses">الكورسات</a></li>
+              <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>الكورسات</h3>
+            <ul>
+              <li><a href="#">تحفيظ القرآن</a></li>
+              <li><a href="#">اللغة العربية</a></li>
+              <li><a href="#">الدراسات الإسلامية</a></li>
+              <li><a href="#">الرياضيات</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>معلومات التواصل</h3>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>القاهرة، مصر</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+20 123 456 7890</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@academy.com</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 أكاديميتنا. جميع الحقوق محفوظة.</p>
+        </div>
       </div>
     </footer>
-    <script src="js/script.js"></script>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-check-circle"></i> تم إرسال طلبك بنجاح!</h3>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p>
+            شكراً لك على التسجيل في أكاديمية تليق. سنتواصل معك خلال 24 ساعة
+            لتأكيد التسجيل وتحديد موعد الحصة التجريبية.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary close-modal">حسناً</button>
+        </div>
+      </div>
+    </div>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/201156080813" target="_blank" class="whatsapp-float">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <script src="script.js"></script>
   </body>
 </html>
