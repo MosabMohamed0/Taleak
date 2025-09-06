@@ -69,55 +69,61 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el);
   });
 });
+
+// --- Google Sheets & Form Submission Logic ---
+
 // رابط Google Apps Script Web App
 const scriptURL =
   "https://script.google.com/macros/s/AKfycbwsXbfcLllF2yUDHjyjXSmmOa2kaIdJ9N-1pZLC1uqGItR_uQtqkc_DHJAYh5axI8uLsw/exec";
-// حط الرابط اللي طلعلك من نشر الويب
 
 const registrationForm = document.getElementById("registrationForm");
 const successModal = document.getElementById("successModal");
 const closeModalBtns = document.querySelectorAll(".close, .close-modal");
 
+// The single, corrected form submission handler
 registrationForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // تحقق من صحة الفورم
-  if (!validateForm()) return;
+  // Step 1: Validate form first
+  if (!validateForm()) {
+    return; // Stop if form is not valid
+  }
 
-  // Show loading state
+  // Step 2: Show loading state
   const submitBtn = e.target.querySelector('button[type="submit"]');
   const originalText = submitBtn.innerHTML;
   submitBtn.innerHTML = '<span class="loading"></span> جاري الإرسال...';
   submitBtn.disabled = true;
 
-  // Collect form data
-  const formData = new FormData(registrationForm);
-  const data = {};
-
-  // Handle regular form fields
-  for (let [key, value] of formData.entries()) {
-    if (key !== "courses") {
-      data[key] = value;
-    }
-  }
-
-  // Handle checkboxes for courses
-  const selectedCourses = [];
-  document.querySelectorAll('input[name="courses"]:checked').forEach((cb) => {
-    selectedCourses.push(cb.value);
-  });
-  data.courses = selectedCourses;
-
-  // Add timestamp
-  data.registrationDate = new Date().toLocaleString("ar-EG");
-
   try {
-    // إرسال البيانات إلى Google Sheets
+    // Step 3: Collect form data
+    const formData = new FormData(registrationForm);
+    const data = {};
+
+    // Handle regular form fields
+    for (let [key, value] of formData.entries()) {
+      if (key !== "courses") {
+        data[key] = value;
+      }
+    }
+
+    // Handle checkboxes for courses
+    const selectedCourses = [];
+    document.querySelectorAll('input[name="courses"]:checked').forEach((cb) => {
+      selectedCourses.push(cb.value);
+    });
+    data.courses = selectedCourses.join(", "); // Join into a single string
+
+    // Add timestamp
+    data.registrationDate = new Date().toLocaleString("ar-EG");
+
+    // Step 4: Send data to Google Sheets
     const response = await fetch(scriptURL, {
       method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
     const result = await response.json();
@@ -130,11 +136,11 @@ registrationForm.addEventListener("submit", async (e) => {
     }
   } catch (err) {
     alert("⚠️ خطأ في الاتصال: " + err.message);
+  } finally {
+    // Step 5: Reset button
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
   }
-
-  // Reset button
-  submitBtn.innerHTML = originalText;
-  submitBtn.disabled = false;
 });
 
 // Modal functionality
@@ -151,7 +157,8 @@ window.addEventListener("click", (e) => {
   }
 });
 
-// ✅ Form validation enhancements
+// --- Form Validation ---
+
 function validateForm() {
   const requiredFields = registrationForm.querySelectorAll("[required]");
   let isValid = true;
@@ -198,7 +205,7 @@ function validateForm() {
   return isValid;
 }
 
-// ✅ Real-time validation
+// Real-time validation feedback
 document.addEventListener("DOMContentLoaded", () => {
   const inputs = registrationForm.querySelectorAll("input, select, textarea");
 
@@ -219,6 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// --- Additional UI Enhancements & Animations ---
+
 // Statistics counter animation
 function animateNumbers() {
   const stats = document.querySelectorAll(".stat-number");
@@ -226,7 +235,7 @@ function animateNumbers() {
   stats.forEach((stat) => {
     const target = parseInt(stat.textContent);
     let current = 0;
-    const increment = target / 50;
+    const increment = target / 50; // Adjust speed here
     const timer = setInterval(() => {
       current += increment;
       if (current >= target) {
@@ -235,7 +244,7 @@ function animateNumbers() {
       }
       stat.textContent =
         Math.floor(current) + (stat.textContent.includes("+") ? "+" : "");
-    }, 40);
+    }, 40); // Adjust interval here
   });
 }
 
@@ -249,27 +258,18 @@ const heroObserver = new IntersectionObserver((entries) => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const heroSection = document.querySelector(".hero");
-  if (heroSection) {
-    heroObserver.observe(heroSection);
-  }
-});
-
 // Course cards hover effects
-document.addEventListener("DOMContentLoaded", () => {
+function addCourseCardEffects() {
   const courseCards = document.querySelectorAll(".course-card");
-
   courseCards.forEach((card) => {
     card.addEventListener("mouseenter", () => {
       card.style.transform = "translateY(-10px) scale(1.02)";
     });
-
     card.addEventListener("mouseleave", () => {
       card.style.transform = "translateY(0) scale(1)";
     });
   });
-});
+}
 
 // Scroll progress indicator
 function createScrollProgress() {
@@ -295,52 +295,29 @@ function createScrollProgress() {
   });
 }
 
-// Initialize scroll progress
-document.addEventListener("DOMContentLoaded", createScrollProgress);
-
 // Lazy loading for images
-document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll("img");
-
+function lazyLoadImages() {
+  const images = document.querySelectorAll("img[data-src]");
   const imageObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const img = entry.target;
-        if (img.dataset.src) {
-          img.src = img.dataset.src;
-          img.removeAttribute("data-src");
-        }
+        img.src = img.dataset.src;
+        img.removeAttribute("data-src");
         imageObserver.unobserve(img);
       }
     });
   });
+  images.forEach((img) => imageObserver.observe(img));
+}
 
-  images.forEach((img) => {
-    imageObserver.observe(img);
-  });
-});
-
-// Enhanced form submission with better UX
-registrationForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  // Validate form first
-  if (!validateForm()) {
-    return;
-  }
-
-  // Rest of the submission code...
-  // (This replaces the earlier submit handler)
-});
-
-// Add smooth reveal animations for sections
+// Smooth reveal animations for sections
 function addRevealAnimations() {
   const sections = document.querySelectorAll("section");
-
   sections.forEach((section) => {
     section.style.opacity = "0";
     section.style.transform = "translateY(50px)";
-    section.style.transition = "all 0.8s ease";
+    section.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
   });
 
   const sectionObserver = new IntersectionObserver(
@@ -349,24 +326,21 @@ function addRevealAnimations() {
         if (entry.isIntersecting) {
           entry.target.style.opacity = "1";
           entry.target.style.transform = "translateY(0)";
+          sectionObserver.unobserve(entry.target);
         }
       });
     },
     { threshold: 0.1 }
   );
 
-  sections.forEach((section) => {
-    sectionObserver.observe(section);
-  });
+  sections.forEach((section) => sectionObserver.observe(section));
 }
 
-// Initialize reveal animations
-document.addEventListener("DOMContentLoaded", addRevealAnimations);
-
-// Add floating action button for quick registration
+// Floating action button for quick registration
 function createFloatingActionButton() {
-  const fab = document.createElement("div");
-  fab.innerHTML = '<i class="fas fa-plus"></i>';
+  const fab = document.createElement("a"); // Use an anchor tag for semantics
+  fab.href = "#register";
+  fab.innerHTML = '<i class="fas fa-plus"></i>'; // Ensure you have FontAwesome linked
   fab.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -388,15 +362,17 @@ function createFloatingActionButton() {
         transform: scale(0);
     `;
 
-  fab.addEventListener("click", () => {
-    document.getElementById("register").scrollIntoView({ behavior: "smooth" });
+  fab.addEventListener("click", (e) => {
+    e.preventDefault();
+    document
+      .querySelector(fab.getAttribute("href"))
+      .scrollIntoView({ behavior: "smooth" });
   });
 
   fab.addEventListener("mouseenter", () => {
     fab.style.transform = "scale(1.1)";
     fab.style.boxShadow = "0 6px 16px rgba(30, 58, 138, 0.4)";
   });
-
   fab.addEventListener("mouseleave", () => {
     fab.style.transform = "scale(1)";
     fab.style.boxShadow = "0 4px 12px rgba(30, 58, 138, 0.3)";
@@ -404,7 +380,6 @@ function createFloatingActionButton() {
 
   document.body.appendChild(fab);
 
-  // Show/hide FAB based on scroll position
   window.addEventListener("scroll", () => {
     if (window.scrollY > 500) {
       fab.style.opacity = "1";
@@ -416,14 +391,10 @@ function createFloatingActionButton() {
   });
 }
 
-// Initialize floating action button
-document.addEventListener("DOMContentLoaded", createFloatingActionButton);
-
-// Add typing animation for hero title
+// Typing animation for hero title
 function typeWriter(element, text, speed = 100) {
   let i = 0;
   element.innerHTML = "";
-
   function type() {
     if (i < text.length) {
       element.innerHTML += text.charAt(i);
@@ -434,47 +405,48 @@ function typeWriter(element, text, speed = 100) {
   type();
 }
 
-// Initialize typing animation
+// --- Initialize everything on DOMContentLoaded ---
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize UI features
+  createScrollProgress();
+  createFloatingActionButton();
+  addCourseCardEffects();
+  lazyLoadImages();
+  addRevealAnimations();
+
+  // Observe hero section for number animation
+  const heroSection = document.querySelector(".hero");
+  if (heroSection) {
+    heroObserver.observe(heroSection);
+  }
+
+  // Initialize typing animation
   const heroTitle = document.querySelector(".hero-title");
   if (heroTitle) {
     const originalText = heroTitle.textContent;
     typeWriter(heroTitle, originalText, 80);
   }
+
+  // Console message for developers
+  console.log(`
+  🎓 أكاديميتنا - موقع الأكاديمية
+  ════════════════════════════════
+
+  📊 إحصائيات الموقع:
+  • تم تحميل جميع الملفات بنجاح
+  • النموذج متصل بـ Google Sheets
+  • جميع الرسوم المتحركة مفعلة
+
+  📋 Google Sheets Integration:
+  • URL: ${scriptURL}
+  • البيانات ترسل تلقائياً لـ Google Sheets
+
+  💡 للمطورين:
+  • الكود منظم وجاهز للتطوير.
+  
+  🔗 التواصل:
+  info@academy.com
+  ════════════════════════════════
+  `);
 });
-
-// Initialize Google Sheets integration on page load
-document.addEventListener("DOMContentLoaded", () => {
-  // Test connection on page load (optional)
-  // testGoogleSheetsConnection();
-
-  // Try to retry any failed submissions from previous sessions
-  setTimeout(() => {
-    retryFailedSubmissions();
-  }, 3000); // Wait 3 seconds after page load
-});
-
-// Console message for developers
-console.log(`
-🎓 أكاديميتنا - موقع الأكاديمية
-════════════════════════════════
-
-📊 إحصائيات الموقع:
-• تم تحميل جميع الملفات بنجاح
-• النموذج متصل بـ Google Sheets
-• جميع الرسوم المتحركة مفعلة
-
-📋 Google Sheets Integration:
-• URL: ${scriptURL}
-• البيانات ترسل تلقائياً لـ Google Sheets
-• نسخة احتياطية في localStorage
-
-💡 للمطورين:
-• البيانات: localStorage.getItem('academyRegistrations')
-• اختبار الاتصال: testGoogleSheetsConnection()
-• إعادة الإرسال: retryFailedSubmissions()
-
-🔗 التواصل:
-info@academy.com
-════════════════════════════════
-`);
