@@ -181,6 +181,13 @@ function addRevealAnimations() {
 
 // Floating action button
 function createFloatingActionButton() {
+  // لو مفيش عنصر top ضيفه تلقائي
+  if (!document.getElementById("top")) {
+    const topDiv = document.createElement("div");
+    topDiv.id = "top";
+    document.body.prepend(topDiv);
+  }
+
   const fab = document.createElement("a");
   fab.href = "#top";
   fab.innerHTML = '<i class="fas fa-arrow-up"></i>';
@@ -233,6 +240,9 @@ function createFloatingActionButton() {
     }
   });
 }
+
+// استدعاء الدالة
+createFloatingActionButton();
 
 // Typing animation
 function typeWriter(element, text, speed = 100) {
