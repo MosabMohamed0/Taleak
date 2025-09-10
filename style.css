@@ -218,6 +218,32 @@ body {
   gap: 1rem;
   flex-wrap: wrap;
 }
+/* زرار تبديل اللغة */
+.lang-switch a {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* مسافة صغيرة بين الأيقونة والنص */
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6); /* أزرق متدرج */
+  color: #fff;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lang-switch a i {
+  font-size: 16px;
+}
+
+.lang-switch a:hover {
+  background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
 
 .btn {
   display: inline-block;
@@ -482,9 +508,13 @@ body {
 }
 
 .course-price .price {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--primary-color);
+  direction: ltr; /* يخلي النص من الشمال لليمين */
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #1e3a8a;
 }
 
 .course-price strong {
